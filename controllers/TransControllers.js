@@ -24,15 +24,26 @@ class TransControllers {
   remove = (req, res) => {
     const { id } = req.params;
     db.query(
-      "SELECT * FROM `transaksi` WHERE ID_TRANSAKSI =" +
+      "DELETE FROM `transaksi` WHERE ID_TRANSAKSI =" +
         id +
-        ";DELETE FROM `invoice` WHERE NO_INVOICE =" +
+        ";DELETE FROM `invoice_penjualan` WHERE ID_TRANSAKSI =" +
         id +
         ";",
       (err, resl) => {
-        if (err) throw res.send(err);
+        if(err) throw err
 
-        res.send(resl);
+        console.log(resl)
+        if(resl[0].affectedRows > 0){
+            res.json({
+              success:true,
+              message:"Berhasil menghapus transaksi"
+            })
+          }else{
+            res.json({
+              success:false,
+              message:"gagal menghapus transakasi"
+            })
+          }
       }
     );
   };

@@ -4,15 +4,16 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 //addon
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
 require("./configs/mysql");
 
 //routes
 const userRouters = require("./routers/userRouters");
 const invoiceRouters = require("./routers/invoiceRouters");
 const transaksiRouters = require("./routers/transRouters");
+const barangRouters = require('./routers/barangRouters');
 
 app.get("/", (req, res) => {
   res.json({
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 app.use("/users", userRouters);
 app.use("/invoice", invoiceRouters);
 app.use("/transaksi", transaksiRouters);
+app.use("/barang", barangRouters);
 
 app.use((req, res) => {
   res.status(404).json({
