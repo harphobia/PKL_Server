@@ -6,7 +6,7 @@ class UserControllers {
   create =(req,res)=>{
     const { nama,nickname,no_telp,email, password } = req.body.data
 
-    db.query("INSERT INTO `user` (`ID_USER`, `NAMA_USER`, `NICKNAME_USER`, `EMAIL_USER`, `PASSWORD_USER`, `TELP_USER`, `AKSES_USER`, `is_online`) VALUES (NULL, '"+nama+"', '"+nickname+"', '"+email+"', '"+password+"', '"+no_telp+"', '0', '0');",(err,resl)=>{
+    db.query("INSERT INTO `user` (`NAMA_USER`, `NICKNAME_USER`, `EMAIL_USER`, `PASSWORD_USER`, `TELP_USER`, `AKSES_USER`, `is_online`) VALUES ('"+nama+"', '"+nickname+"', '"+email+"', '"+password+"', '"+no_telp+"', '0', '0');",(err,resl)=>{
         if(err) throw err
 
         if(resl.affectedRows == 1){
